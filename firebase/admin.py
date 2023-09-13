@@ -10,6 +10,7 @@ default_app = firebase_admin.initialize_app(cred_obj, {
 print("Menu")
 print("\n1. Clear Weekly Scores")
 print("2. Clear All Scores")
+print("3. See number of users")
 
 i = int(input())
 
@@ -46,3 +47,8 @@ elif i == 2:
             problems['medium'] = {'state': False, 'time': None }
             problems['hard'] = {'state': False, 'time': None }
             ref.child(uid).update({"problems": problems})
+elif i == 3:
+    ref = db.reference("/users")
+    data = ref.get()
+    print(len(data))
+
