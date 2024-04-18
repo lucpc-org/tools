@@ -2,15 +2,17 @@ import firebase_admin
 from firebase_admin import db
 
 
-cred_obj = firebase_admin.credentials.Certificate('./admin_cert.json')
+cred_obj = firebase_admin.credentials.Certificate('../admin_cert.json')
 default_app = firebase_admin.initialize_app(cred_obj, {
 	'databaseURL': 'https://lucpc-edf35-default-rtdb.firebaseio.com/'
 })
+
 
 print("Menu")
 print("\n1. Clear Weekly Scores")
 print("2. Clear All Scores")
 print("3. See number of users")
+print("4. Clear checked out books")
 
 i = int(input())
 
@@ -51,4 +53,9 @@ elif i == 3:
     ref = db.reference("/users")
     data = ref.get()
     print(len(data))
-
+elif i == 4:
+    ref = db.reference("/users")
+    data = ref.get()
+    for uid, user in data.items():
+        ref.child(uid).update({"checked_out_book": False})
+        print('Updated', user['name'])
