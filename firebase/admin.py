@@ -2,7 +2,7 @@ import firebase_admin
 from firebase_admin import db
 
 
-cred_obj = firebase_admin.credentials.Certificate('../admin_cert.json')
+cred_obj = firebase_admin.credentials.Certificate('./admin_cert.json')
 default_app = firebase_admin.initialize_app(cred_obj, {
 	'databaseURL': 'https://lucpc-edf35-default-rtdb.firebaseio.com/'
 })
